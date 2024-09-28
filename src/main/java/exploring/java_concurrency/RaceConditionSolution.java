@@ -14,13 +14,16 @@ public class RaceConditionSolution {
 
         var thread1 = new Thread(regraDeNegocio);
         var thread2 = new Thread(regraDeNegocio);
+        var thread3 = new Thread(regraDeNegocio);
 
         thread1.start();
         thread2.start();
+        thread3.start();
         thread1.join();
         thread2.join();
+        thread3.join();
 
-        System.out.println("Valor final: " + conta1.getTotal());
+        System.out.println("Valor final esperado: 6000. O valor final após processamento foi: " + conta1.getTotal());
     }
 
     static class Conta {

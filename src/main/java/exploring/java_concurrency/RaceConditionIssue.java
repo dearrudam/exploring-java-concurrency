@@ -8,9 +8,11 @@ public class RaceConditionIssue {
          * Simular condições de concorrência é muito difícil,
          * isto é, pode ser que para poder reproduzir algum cenário
          * talvez será necessário executar excessivamente ele para
-         * pegar o cenário. Talvez, ao executar essa classe vc vai
-         * deparar com o resultado experado, mas uma hora ele vai
-         * se apresentar a você...
+         * pegar o cenário. Isso acontece por vários fatores,
+         * como por exemplo o escalonador de threads pode ativar as
+         * threads em tempos diferentes causando situações imprevisíveis.
+         * Executando essa classe multiplas vezes, em um dado momento,
+         * vc vai se deparar o problema de race condition
          *
          */
 
@@ -24,13 +26,16 @@ public class RaceConditionIssue {
 
         var thread1 = new Thread(regraDeNegocio);
         var thread2 = new Thread(regraDeNegocio);
+        var thread3 = new Thread(regraDeNegocio);
 
         thread1.start();
         thread2.start();
+        thread3.start();
         thread1.join();
         thread2.join();
+        thread3.join();
 
-        System.out.println("Valor final: " + conta1.getTotal());
+        System.out.println("Valor final esperado: 6000. O valor final após processamento foi: " + conta1.getTotal());
     }
 
     /**
